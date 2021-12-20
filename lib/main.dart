@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:salud_100/pages/cuestionario.dart';
-import 'package:salud_100/pages/Resultados.dart';
+import 'package:salud_100/pages/Preguntas.dart';
+import 'package:salud_100/pages/Nosotros.dart';
 import 'package:salud_100/pages/Home.dart';
 
 void main() => runApp(const MyApp());
@@ -14,12 +14,11 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   int _paginaActual = 0;
-
-  List<Widget> _paginas = [
-    PaginaHome(),
-    PaginaCuestionario(),
-    PaginaResultados(),
-  ];
+  void paginaCuestionario() {
+    setState(() {
+      _paginaActual = 1;
+    });
+  }
 
   List<Widget> _tituloPaginas = [
     Text(
@@ -37,22 +36,27 @@ class _MyAppState extends State<MyApp> {
         fontWeight: FontWeight.bold,
         fontSize: 36,
         fontFamily: 'Roboto',
-        color: Colors.black,
+        color: Color.fromRGBO(62, 151, 139, 1),
       ),
     ),
     Text(
-      "Resultados",
+      "Nosotros",
       style: TextStyle(
         fontWeight: FontWeight.bold,
         fontSize: 36,
         fontFamily: 'Roboto',
-        color: Colors.black,
+        color: Color.fromRGBO(62, 151, 139, 1),
       ),
     ),
   ];
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> _paginas = [
+      PaginaHome(onbottonclick: paginaCuestionario),
+      PreguntasPage(),
+      Nosotros(),
+    ];
     const appTitle = 'Cuestionario';
 
     return MaterialApp(
@@ -67,6 +71,13 @@ class _MyAppState extends State<MyApp> {
             elevation: 0,
             title: Row(
               children: [
+                Image.asset(
+                  'assets/icono2.png',
+                  height: 60,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
                 _tituloPaginas[_paginaActual],
               ],
             ),
@@ -95,8 +106,8 @@ class _MyAppState extends State<MyApp> {
               label: "Cuestionario",
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.list_alt_outlined),
-              label: "Resultados",
+              icon: Icon(Icons.info_outline),
+              label: "Nosotros",
             ),
           ],
         ),
